@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firozbhai Rasulpuriya - Worldwide Naat</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f8f4;color:#183b2b;font-family:Arial}
+header{background:#075b39;color:white;text-align:center;padding:30px 15px}
+header h1{font-size:29px;margin:0}
+header p{margin:10px 0}
+main{max-width:700px;margin:auto;padding:14px}
+.card{background:white;padding:19px;margin:15px 0;border-radius:15px;box-shadow:0 3px 12px #0001}
+h2{color:#087044}
+input,button{width:100%;padding:13px;margin:7px 0;border:1px solid #ccc;border-radius:9px;font-size:16px}
+button{background:#087044;color:white;border:0;font-weight:bold}
+.premium{background:#075b39;color:white;text-align:center}
+.premium h2{color:#fff}
+.price{font-size:32px;font-weight:bold}
+small{color:inherit}
+audio,video,iframe{width:100%;margin-top:12px;border-radius:10px}
+iframe{aspect-ratio:16/9;height:auto;border:0}
+footer{text-align:center;padding:22px;color:#567}
+</style>
+</head>
+<body>
+<header>
+<h1>🌍 Firozbhai Rasulpuriya</h1>
+<p>Worldwide Islamic Naat Audio & Video</p>
+<p>Peace • Love • Faith</p>
+</header>
+<main>
+<div class="card">
+<h2>🎵 Listen to Your Own Naat</h2>
+<input type="file" id="audioFile" accept="audio/*">
+<audio id="audioPlayer" controls></audio>
+</div>
+<div class="card">
+<h2>🎬 Watch Your Own Naat Videos</h2>
+<input type="file" id="videoFile" accept="video/*">
+<video id="videoPlayer" controls playsinline></video>
+</div>
+<div class="card">
+<h2>▶️ Watch Naat from YouTube</h2>
+<input id="youtubeURL" placeholder="Paste YouTube video link">
+<button onclick="playYoutube()">Play YouTube Naat</button>
+<div id="youtubePlayer"></div>
+</div>
+<div class="card premium">
+<h2>👑 Become a Premium Member</h2>
+<div class="price">₹299 / month</div>
+<p>Enjoy an enhanced experience and support our Islamic Naat platform.</p>
+<p><b>A humble request:</b> Please subscribe and support Firozbhai Rasulpuriya so we can continue sharing beautiful Naats with people worldwide.</p>
+<button onclick="subscribe()">❤️ Subscribe Now</button>
+<small id="paymentMessage">Secure subscription payment setup is coming soon.</small>
+</div>
+<div class="card">
+<h2>❤️ Support Our Naat App</h2>
+<p>Your support helps us share Islamic Naats with the world. Thank you for being with us.</p>
+</div>
+<div class="card">
+<h2>📺 Our Official YouTube Channel</h2>
+<p>Subscribe to Firoz Alam's official channel for Islamic Naats.</p>
+<a href="https://www.youtube.com/@firozalam9467" target="_blank" rel="noopener">
+<button>🔔 Subscribe on YouTube</button>
+</a>
+</div>
+<div class="card">
+<h2>About Us</h2>
+<p>Welcome to Firozbhai Rasulpuriya, a worldwide platform for Islamic Naats, audio and videos.</p>
+</div>
+</main>
+<footer>© 2026 Firozbhai Rasulpuriya | Worldwide</footer>
+<script>
+function loadFile(input,player){
+const f=input.files[0];
+if(f){player.src=URL.createObjectURL(f);player.load();}
+}
+audioFile.onchange=()=>loadFile(audioFile,audioPlayer);
+videoFile.onchange=()=>loadFile(videoFile,videoPlayer);
+function playYoutube(){
+let url=youtubeURL.value.trim(),id="";
+try{
+if(url.includes("youtu.be/"))id=url.split("youtu.be/")[1].split(/[?&]/)[0];
+else if(url.includes("youtube.com/shorts/"))id=url.split("/shorts/")[1].split(/[?&]/)[0];
+else id=new URL(url).searchParams.get("v")||"";
+}catch(e){}
+if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){alert("Please enter a valid YouTube link.");return;}
+youtubePlayer.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>';
+}
+function subscribe(){
+alert("Thank you for supporting Firozbhai Rasulpuriya! Online subscription payments are not activated yet. Please check back soon.");
+}
+</script>
+</body>
+</html>
