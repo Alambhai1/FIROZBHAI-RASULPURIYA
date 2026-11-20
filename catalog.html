@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Naat Library | FIROZBHAI RASULPURIYA</title>
+<style>
+body{font-family:Arial;background:#f4f7f5;color:#222;padding:16px}
+main{max-width:850px;margin:auto}
+input{width:95%;padding:13px;border:1px solid #ccc;border-radius:8px}
+.card{background:white;padding:16px;margin:12px 0;border-radius:12px}
+h1,h2{color:#087443}
+button{padding:10px 16px;margin:5px;border:0;border-radius:7px;background:#087443;color:white}
+a{color:#087443}
+</style>
+</head>
+<body>
+<main>
+<h1>FIROZBHAI RASULPURIYA</h1>
+<h2>Islamic Naat Library</h2>
+<p>Free listening and Premium membership</p>
+<input id="search" placeholder="Naat ya artist ka naam search karein">
+<p id="count">Naat list load ho rahi hai...</p>
+<div id="list"></div>
+<div>
+<button id="prev">Previous</button>
+<span id="page"></span>
+<button id="next">Next</button>
+</div>
+<p><a href="plans.html">Free & Premium Subscription Plans</a></p>
+<p><a href="index.html">Main Website</a></p>
+<script>
+let naats=[],filtered=[],page=0,limit=50;
+const list=document.getElementById('list');
+function render(){
+let start=page*limit;
+let items=filtered.slice(start,start+limit);
+list.innerHTML=items.length?items.map(n=>
+'<div class="card"><b>'+safe(n.title)+'</b><p>'+safe(n.note||'')+'</p><a href="'+safeURL(n.url)+'" target="_blank" rel="noopener">Open / Listen</a></div>'
+).join(''):'<div class="card">Abhi koi verified Naat record nahi hai.</div>';
+document.getElementById('count').textContent='Total available records: '+filtered.length;
+document.getElementById('page').textContent='Page '+(page+1)+' / '+Math.max(1,Math.ceil(filtered.length/limit));
+document.getElementById('prev').disabled=page===0;
+document.getElementById('next').disabled=start+limit>=filtered.length;
+}
+function safe(v){return String(v||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function safeURL(v){try{let u=new URL(v);return ['https:'].includes(u.protocol)?safe(u.href):'#'}catch(e){return '#'}}
+fetch('naat.json').then(r=>r.json()).then(data=>{
+naats=Array.isArray(data)?data:[];
+filtered=naats;render();
+}).catch(()=>{filtered=[];render();document.getElementById('count').textContent='Naat file load nahi hui.'});
+document.getElementById('search').addEventListener('input',e=>{
+let q=e.target.value.toLowerCase();
+filtered=naats.filter(n=>(n.title||'').toLowerCase().includes(q)||(n.note||'').toLowerCase().includes(q));
+page=0;render();
+});
+document.getElementById('prev').onclick=()=>{if(page>0){page--;render()}};
+document.getElementById('next').onclick=()=>{if((page+1)*limit<filtered.length){page++;render()}};
+</script>
+</main>
+</body>
+</html>
