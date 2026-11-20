@@ -1,97 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Firozbhai Rasulpuriya - Worldwide Naat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FIROZBHAI RASULPURIYA | Islamic Naat</title>
+<meta name="description" content="Listen to beautiful Islamic Naats, watch videos and share with friends.">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f3f8f4;color:#183b2b;font-family:Arial}
-header{background:#075b39;color:white;text-align:center;padding:30px 15px}
-header h1{font-size:29px;margin:0}
-header p{margin:10px 0}
-main{max-width:700px;margin:auto;padding:14px}
-.card{background:white;padding:19px;margin:15px 0;border-radius:15px;box-shadow:0 3px 12px #0001}
-h2{color:#087044}
-input,button{width:100%;padding:13px;margin:7px 0;border:1px solid #ccc;border-radius:9px;font-size:16px}
-button{background:#087044;color:white;border:0;font-weight:bold}
-.premium{background:#075b39;color:white;text-align:center}
-.premium h2{color:#fff}
-.price{font-size:32px;font-weight:bold}
-small{color:inherit}
-audio,video,iframe{width:100%;margin-top:12px;border-radius:10px}
-iframe{aspect-ratio:16/9;height:auto;border:0}
-footer{text-align:center;padding:22px;color:#567}
+body{margin:0;background:#f3f7f4;color:#17352a;font-family:Arial,sans-serif}
+header{background:linear-gradient(135deg,#063d2c,#087653);color:white;text-align:center;padding:35px 15px}
+header h1{margin:0;font-size:27px}
+header p{margin:10px 0 0}
+nav{background:#052e22;padding:13px;text-align:center;position:sticky;top:0;z-index:5}
+nav a{color:white;text-decoration:none;margin:0 10px;font-size:14px}
+main{max-width:950px;margin:auto;padding:18px}
+h2{color:#087653}
+input,select{padding:13px;border:1px solid #cbd8d0;border-radius:9px;width:100%;margin:6px 0;font-size:15px}
+.card{background:white;padding:17px;margin:13px 0;border-radius:13px;box-shadow:0 3px 12px #00000010}
+button{background:#087653;color:white;border:0;border-radius:8px;padding:11px 16px;margin:5px;cursor:pointer}
+audio,video{width:100%;margin-top:10px}
+.media{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.media img{width:100%;border-radius:10px}
+footer{text-align:center;background:#052e22;color:white;padding:25px;margin-top:35px}
+.small{color:#65756c;font-size:13px}
 </style>
 </head>
 <body>
 <header>
-<h1>🌍 Firozbhai Rasulpuriya</h1>
-<p>Worldwide Islamic Naat Audio & Video</p>
-<p>Peace • Love • Faith</p>
+<h1>FIROZBHAI RASULPURIYA</h1>
+<p>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+<p>Islamic Naat • Audio • Video</p>
 </header>
+<nav>
+<a href="#naat">Naat</a><a href="#photos">Photos</a><a href="#videos">Videos</a><a href="#add">Add Naat</a>
+</nav>
 <main>
+<section id="naat">
+<h2>🎧 Islamic Naat Collection</h2>
+<input id="search" placeholder="Search Naat..." oninput="render()">
+<select id="category" onchange="render()">
+<option value="all">All Naats</option><option value="audio">Audio Naats</option>
+</select>
+<div id="list"></div>
+</section>
+<section id="photos">
+<h2>📸 Naat Photos</h2><div class="media" id="photoList"></div>
+</section>
+<section id="videos">
+<h2>🎬 Naat Videos</h2><div id="videoList"></div>
+</section>
+<section id="add">
+<h2>➕ Add Naat (Preview)</h2>
 <div class="card">
-<h2>🎵 Listen to Your Own Naat</h2>
-<input type="file" id="audioFile" accept="audio/*">
-<audio id="audioPlayer" controls></audio>
+<p>अपने मोबाइल से MP3 चुनकर सुनें:</p>
+<input type="file" id="newAudio" accept="audio/*">
+<div id="preview"></div>
+<p class="small">यहाँ चुनी गई फाइल आपके मोबाइल पर preview होगी। सभी लोगों के लिए प्रकाशित करने के लिए MP3 को assets/audio में रखकर GitHub पर push करना होगा।</p>
 </div>
+</section>
 <div class="card">
-<h2>🎬 Watch Your Own Naat Videos</h2>
-<input type="file" id="videoFile" accept="video/*">
-<video id="videoPlayer" controls playsinline></video>
-</div>
-<div class="card">
-<h2>▶️ Watch Naat from YouTube</h2>
-<input id="youtubeURL" placeholder="Paste YouTube video link">
-<button onclick="playYoutube()">Play YouTube Naat</button>
-<div id="youtubePlayer"></div>
-</div>
-<div class="card premium">
-<h2>👑 Become a Premium Member</h2>
-<div class="price">₹299 / month</div>
-<p>Enjoy an enhanced experience and support our Islamic Naat platform.</p>
-<p><b>A humble request:</b> Please subscribe and support Firozbhai Rasulpuriya so we can continue sharing beautiful Naats with people worldwide.</p>
-<button onclick="subscribe()">❤️ Subscribe Now</button>
-<small id="paymentMessage">Secure subscription payment setup is coming soon.</small>
-</div>
-<div class="card">
-<h2>❤️ Support Our Naat App</h2>
-<p>Your support helps us share Islamic Naats with the world. Thank you for being with us.</p>
-</div>
-<div class="card">
-<h2>📺 Our Official YouTube Channel</h2>
-<p>Subscribe to Firoz Alam's official channel for Islamic Naats.</p>
-<a href="https://www.youtube.com/@firozalam9467" target="_blank" rel="noopener">
-<button>🔔 Subscribe on YouTube</button>
-</a>
-</div>
-<div class="card">
-<h2>About Us</h2>
-<p>Welcome to Firozbhai Rasulpuriya, a worldwide platform for Islamic Naats, audio and videos.</p>
+<h2>📲 Share Website</h2>
+<button onclick="shareSite()">WhatsApp / Share</button>
 </div>
 </main>
-<footer>© 2026 Firozbhai Rasulpuriya | Worldwide</footer>
+<footer>
+<p>FIROZBHAI RASULPURIYA</p>
+<p>Islamic Naat Website</p>
+</footer>
 <script>
-function loadFile(input,player){
-const f=input.files[0];
-if(f){player.src=URL.createObjectURL(f);player.load();}
+let naats=[];
+async function load(){
+try{let r=await fetch('naat.json?'+Date.now());if(r.ok)naats=await r.json()}catch(e){}
+render();
+loadMedia('photos.json','photoList','image');
+loadMedia('videos.json','videoList','video');
 }
-audioFile.onchange=()=>loadFile(audioFile,audioPlayer);
-videoFile.onchange=()=>loadFile(videoFile,videoPlayer);
-function playYoutube(){
-let url=youtubeURL.value.trim(),id="";
+function render(){
+let q=document.getElementById('search').value.toLowerCase();
+let items=naats.filter(n=>n.title.toLowerCase().includes(q));
+document.getElementById('list').innerHTML=items.length?items.map((n,i)=>`
+<div class="card"><b>${n.title}</b><audio controls preload="none" src="${n.url}"></audio>
+<button onclick="shareNaat('${encodeURIComponent(n.title)}')">Share Naat</button></div>`).join(''):'<div class="card">अभी कोई Naat नहीं है। MP3 फाइल assets/audio में जोड़ें।</div>';
+}
+async function loadMedia(file,id,type){
 try{
-if(url.includes("youtu.be/"))id=url.split("youtu.be/")[1].split(/[?&]/)[0];
-else if(url.includes("youtube.com/shorts/"))id=url.split("/shorts/")[1].split(/[?&]/)[0];
-else id=new URL(url).searchParams.get("v")||"";
+let r=await fetch(file);if(!r.ok)return;
+let arr=await r.json();
+document.getElementById(id).innerHTML=arr.map(x=>type==='image'?`<img src="${x.url}" alt="${x.title}">`:`<div class="card"><b>${x.title}</b><video controls preload="none" src="${x.url}"></video></div>`).join('');
 }catch(e){}
-if(!/^[a-zA-Z0-9_-]{11}$/.test(id)){alert("Please enter a valid YouTube link.");return;}
-youtubePlayer.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>';
 }
-function subscribe(){
-alert("Thank you for supporting Firozbhai Rasulpuriya! Online subscription payments are not activated yet. Please check back soon.");
+document.getElementById('newAudio').addEventListener('change',e=>{
+let f=e.target.files[0];if(!f)return;
+let u=URL.createObjectURL(f);
+document.getElementById('preview').innerHTML='<b>'+f.name+'</b><audio controls autoplay src="'+u+'"></audio>';
+});
+function shareSite(){
+let u=location.href,t='Listen to Islamic Naats: '+u;
+if(navigator.share)navigator.share({title:document.title,text:t,url:u});
+else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
 }
+function shareNaat(t){
+let u=location.href;
+window.open('https://wa.me/?text='+encodeURIComponent(decodeURIComponent(t)+' - '+u),'_blank');
+}
+load();
 </script>
 </body>
 </html>
