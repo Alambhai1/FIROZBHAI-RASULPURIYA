@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "FIROZBHAI RASULPURIYA",
+  "short_name": "FIROZBHAI",
+  "description": "Islamic Naat Audio Video and Live",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f1f7f3",
+  "theme_color": "#064b36",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

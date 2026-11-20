@@ -3,118 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FIROZBHAI RASULPURIYA | Islamic Naat</title>
-<meta name="description" content="Listen to beautiful Islamic Naats, watch videos and share with friends.">
+<meta name="theme-color" content="#064b36">
+<meta name="description" content="FIROZBHAI RASULPURIYA - Islamic Naat, Audio, Videos and Live Streaming">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="FIROZBHAI">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>FIROZBHAI RASULPURIYA</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#f3f7f4;color:#17352a;font-family:Arial,sans-serif}
-header{background:linear-gradient(135deg,#063d2c,#087653);color:white;text-align:center;padding:35px 15px}
-header h1{margin:0;font-size:27px}
-header p{margin:10px 0 0}
-nav{background:#052e22;padding:13px;text-align:center;position:sticky;top:0;z-index:5}
-nav a{color:white;text-decoration:none;margin:0 10px;font-size:14px}
-main{max-width:950px;margin:auto;padding:18px}
+body{margin:0;background:#f1f7f3;color:#17352a;font-family:Arial,sans-serif}
+header{background:linear-gradient(140deg,#032d21,#087c55);color:white;text-align:center;padding:35px 15px 28px}
+header h1{font-size:25px;margin:8px 0}
+header p{margin:8px}
+.logo{font-size:43px}
+nav{background:#052e22;display:flex;justify-content:center;gap:19px;padding:14px 5px;position:sticky;top:0;z-index:5;overflow-x:auto}
+nav a{color:white;text-decoration:none;white-space:nowrap;font-size:13px}
+main{max-width:850px;margin:auto;padding:15px}
 h2{color:#087653}
-input,select{padding:13px;border:1px solid #cbd8d0;border-radius:9px;width:100%;margin:6px 0;font-size:15px}
-.card{background:white;padding:17px;margin:13px 0;border-radius:13px;box-shadow:0 3px 12px #00000010}
-button{background:#087653;color:white;border:0;border-radius:8px;padding:11px 16px;margin:5px;cursor:pointer}
+.card{background:white;padding:18px;margin:14px 0;border-radius:15px;box-shadow:0 3px 14px #0000000c}
+.hero{background:linear-gradient(135deg,#07583e,#07875c);color:white;text-align:center;padding:23px;border-radius:16px}
+.hero h2{color:white}
+button,.btn{display:inline-block;background:#087653;color:white;border:0;padding:12px 17px;border-radius:9px;text-decoration:none;cursor:pointer;margin:5px}
+.gold{background:#bd8b2c}
+input,select{width:100%;padding:13px;border:1px solid #ccd9d0;border-radius:9px;margin:7px 0;font-size:15px}
 audio,video{width:100%;margin-top:10px}
-.media{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.media img{width:100%;border-radius:10px}
-footer{text-align:center;background:#052e22;color:white;padding:25px;margin-top:35px}
-.small{color:#65756c;font-size:13px}
+.media{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.media img{width:100%;border-radius:12px}
+.small{font-size:13px;color:#718078}
+footer{text-align:center;background:#052e22;color:white;padding:25px;margin-top:25px}
+footer a{color:white}
+.center{text-align:center}
+.live{background:#fff2f0;border:1px solid #ffd4cd}
+.live h2{color:#b52b20}
 </style>
 </head>
 <body>
 <header>
+<div class="logo">☪️</div>
 <h1>FIROZBHAI RASULPURIYA</h1>
 <p>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-<p>Islamic Naat • Audio • Video</p>
+<p>Islamic Naat • Audio • Video • Live</p>
 </header>
+
 <nav>
-<a href="#naat">Naat</a><a href="#photos">Photos</a><a href="#videos">Videos</a><a href="#add">Add Naat</a>
+<a href="#naat">Naat</a>
+<a href="#live">Live</a>
+<a href="#photos">Photos</a>
+<a href="#videos">Videos</a>
+<a href="catalog.html">Library</a>
+<a href="plans.html">Premium</a>
 </nav>
+
 <main>
+<section class="hero">
+<h2>Welcome to Our Islamic Platform ❤️</h2>
+<p>इस्लामिक नात सुनें, वीडियो देखें और दोस्तों के साथ शेयर करें।</p>
+<button id="installBtn" hidden>📲 Install App</button>
+</section>
+
 <section id="naat">
 <h2>🎧 Islamic Naat Collection</h2>
-<input id="search" placeholder="Search Naat..." oninput="render()">
-<select id="category" onchange="render()">
-<option value="all">All Naats</option><option value="audio">Audio Naats</option>
+<input id="search" placeholder="Naat का नाम खोजें..." autocomplete="off">
+<select id="category">
+<option value="all">All Naats</option>
+<option value="audio">Audio Naats</option>
 </select>
-<div id="list"></div>
-</section>
-<section id="photos">
-<h2>📸 Naat Photos</h2><div class="media" id="photoList"></div>
-</section>
-<section id="videos">
-<h2>🎬 Naat Videos</h2><div id="videoList"></div>
-</section>
-<section id="add">
-<h2>➕ Add Naat (Preview)</h2>
+<div id="list"><div class="card">Naat Library लोड हो रही है...</div></div>
 <div class="card">
-<p>अपने मोबाइल से MP3 चुनकर सुनें:</p>
+<h3>🎵 अपनी Audio सुनें</h3>
 <input type="file" id="newAudio" accept="audio/*">
 <div id="preview"></div>
-<p class="small">यहाँ चुनी गई फाइल आपके मोबाइल पर preview होगी। सभी लोगों के लिए प्रकाशित करने के लिए MP3 को assets/audio में रखकर GitHub पर push करना होगा।</p>
+<p class="small">यह केवल आपके मोबाइल का Preview है। सार्वजनिक प्रकाशन के लिए अधिकृत Audio अपलोड करना होगा।</p>
 </div>
 </section>
-<div class="card">
-<h2>📲 Share Website</h2>
+
+<section id="live" class="card live center">
+<h2>🔴 FIROZBHAI RASULPURIYA LIVE</h2>
+<p>हमारे आधिकारिक YouTube चैनल पर Naat और Islamic प्रसारण देखें।</p>
+<a class="btn" href="https://www.youtube.com/@firozalam9467" target="_blank" rel="noopener">▶ YouTube Channel खोलें</a>
+<p class="small">लाइव प्रसारण उपलब्ध होने पर YouTube पर दिखाई देगा।</p>
+</section>
+
+<section id="photos">
+<h2>📸 Naat Photos</h2>
+<div class="media" id="photoList"></div>
+</section>
+
+<section id="videos">
+<h2>🎬 Naat Videos</h2>
+<div id="videoList"></div>
+</section>
+
+<section class="card center">
+<h2>⭐ Membership</h2>
+<p>Free और Premium Membership की जानकारी प्राप्त करें।</p>
+<a class="btn gold" href="plans.html">Premium Plans देखें</a>
+<a class="btn" href="catalog.html">Naat Library खोलें</a>
+</section>
+
+<section class="card center">
+<h2>📲 Share Our App</h2>
+<p>अपने दोस्तों और परिवार के साथ शेयर करें।</p>
 <button onclick="shareSite()">WhatsApp / Share</button>
-</div>
+</section>
 </main>
+
 <footer>
-<p>FIROZBHAI RASULPURIYA</p>
-<p>Islamic Naat Website</p>
+<h3>FIROZBHAI RASULPURIYA</h3>
+<p>Islamic Naat • Audio • Video</p>
+<p><a href="plans.html">Membership</a> |
+<a href="catalog.html">Library</a> |
+<a href="rights.html">Copyright Policy</a></p>
+<p class="small">© FIROZBHAI RASULPURIYA</p>
 </footer>
+
 <script>
 let naats=[];
+const $=id=>document.getElementById(id);
+
+function safeUrl(value){
+try{
+const u=new URL(value,location.href);
+return ['http:','https:'].includes(u.protocol)?u.href:'';
+}catch(e){return '';}
+}
+function escapeHTML(s){
+return String(s||'').replace(/[&<>"']/g,c=>({
+'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+}
 async function load(){
-try{let r=await fetch('naat.json?'+Date.now());if(r.ok)naats=await r.json()}catch(e){}
+try{
+const r=await fetch('./naat.json');
+if(r.ok){
+const data=await r.json();
+naats=Array.isArray(data)?data:[];
+}
+}catch(e){}
 render();
 loadMedia('photos.json','photoList','image');
 loadMedia('videos.json','videoList','video');
 }
 function render(){
-let q=document.getElementById('search').value.toLowerCase();
-let items=naats.filter(n=>n.title.toLowerCase().includes(q));
-document.getElementById('list').innerHTML=items.length?items.map(n=>
-`<div class="card"><b>${n.title}</b><p>${n.note||''}</p><a href="${n.url}" target="_blank" rel="noopener">🔊 Open / Listen</a></div>`
-).join(''):'<div class="card">अभी कोई Naat नहीं मिली।</div>';
+const q=$('search').value.toLowerCase();
+const items=naats.filter(n=>
+String(n.title||'').toLowerCase().includes(q)||
+String(n.note||'').toLowerCase().includes(q)
+);
+$('list').innerHTML=items.length?items.map(n=>{
+const url=safeUrl(n.url||'');
+return `<div class="card">
+<h3>${escapeHTML(n.title)}</h3>
+<p>${escapeHTML(n.note)}</p>
+${url?`<audio controls preload="none" src="${escapeHTML(url)}"></audio>`:''}
+${url?`<button onclick="shareNaat('${encodeURIComponent(n.title||'Naat')}')">Share Naat</button>`:''}
+</div>`;
+}).join(''):'<div class="card">अभी कोई Naat उपलब्ध नहीं है।</div>';
 }
 async function loadMedia(file,id,type){
 try{
-let r=await fetch(file);if(!r.ok)return;
-let arr=await r.json();
-document.getElementById(id).innerHTML=arr.map(x=>type==='image'?`<img src="${x.url}" alt="${x.title}">`:`<div class="card"><b>${x.title}</b><video controls preload="none" src="${x.url}"></video></div>`).join('');
+const r=await fetch('./'+file);
+if(!r.ok)return;
+const arr=await r.json();
+$(id).innerHTML=Array.isArray(arr)?arr.map(x=>{
+const url=safeUrl(x.url||'');
+if(!url)return '';
+return type==='image'
+?`<div class="card"><img loading="lazy" src="${escapeHTML(url)}" alt="${escapeHTML(x.title)}"><p>${escapeHTML(x.title)}</p></div>`
+:`<div class="card"><b>${escapeHTML(x.title)}</b><video controls preload="none" src="${escapeHTML(url)}"></video></div>`;
+}).join(''):'';
 }catch(e){}
 }
-document.getElementById('newAudio').addEventListener('change',e=>{
-let f=e.target.files[0];if(!f)return;
-let u=URL.createObjectURL(f);
-document.getElementById('preview').innerHTML='<b>'+f.name+'</b><audio controls autoplay src="'+u+'"></audio>';
+$('search').addEventListener('input',render);
+$('category').addEventListener('change',render);
+$('newAudio').addEventListener('change',e=>{
+const f=e.target.files[0];
+if(!f)return;
+if(!f.type.startsWith('audio/'))return alert('कृपया Audio फाइल चुनें।');
+const u=URL.createObjectURL(f);
+$('preview').innerHTML=`<b>${escapeHTML(f.name)}</b><audio controls autoplay src="${u}"></audio>`;
 });
 function shareSite(){
-let u=location.href,t='Listen to Islamic Naats: '+u;
-if(navigator.share)navigator.share({title:document.title,text:t,url:u});
-else window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank');
+const u=location.href;
+const text='Listen to Islamic Naats - '+u;
+if(navigator.share)navigator.share({title:document.title,text,url:u}).catch(()=>{});
+else window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
 }
 function shareNaat(t){
-let u=location.href;
-window.open('https://wa.me/?text='+encodeURIComponent(decodeURIComponent(t)+' - '+u),'_blank');
+window.open('https://wa.me/?text='+encodeURIComponent(decodeURIComponent(t)+' - '+location.href),'_blank');
+}
+let installPrompt;
+const installBtn=$('installBtn');
+window.addEventListener('beforeinstallprompt',e=>{
+e.preventDefault();
+installPrompt=e;
+installBtn.hidden=false;
+});
+installBtn.addEventListener('click',async()=>{
+if(!installPrompt){
+alert('Browser menu खोलें और Add to Home Screen चुनें।');
+return;
+}
+installPrompt.prompt();
+await installPrompt.userChoice;
+installPrompt=null;
+installBtn.hidden=true;
+});
+if('serviceWorker' in navigator && location.protocol!=='file:'){
+window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 }
 load();
 </script>
-<p style="text-align:center;padding:20px"><a href="rights.html">Copyright & Artist Permission Policy</a></p>
-<p style="text-align:center;padding:15px"><a href="plans.html">Free & Premium Subscription Plans</a></p><p style="text-align:center"><a href="catalog.html">Explore Naat Library</a></p>
-<section style="max-width:850px;margin:25px auto;padding:20px;text-align:center;background:#f4f7f5;border-radius:14px">
-<h2>🔴 FIROZBHAI RASULPURIYA - YouTube Naat Live</h2>
-<p>हमारे YouTube चैनल पर Naat Live सुनें।</p>
-<a href="https://www.youtube.com/" target="_blank" rel="noopener"
-style="display:inline-block;background:#d00;color:white;padding:13px 22px;border-radius:8px;text-decoration:none">
-YouTube खोलें
-</a>
-<p>Live प्रसारण शुरू होने पर उसका आधिकारिक लिंक यहाँ जोड़ा जाएगा।</p>
-</section>
 </body>
 </html>
