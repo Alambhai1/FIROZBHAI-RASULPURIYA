@@ -78,9 +78,9 @@ loadMedia('videos.json','videoList','video');
 function render(){
 let q=document.getElementById('search').value.toLowerCase();
 let items=naats.filter(n=>n.title.toLowerCase().includes(q));
-document.getElementById('list').innerHTML=items.length?items.map((n,i)=>`
-<div class="card"><b>${n.title}</b><audio controls preload="none" src="${n.url}"></audio>
-<button onclick="shareNaat('${encodeURIComponent(n.title)}')">Share Naat</button></div>`).join(''):'<div class="card">अभी कोई Naat नहीं है। MP3 फाइल assets/audio में जोड़ें।</div>';
+document.getElementById('list').innerHTML=items.length?items.map(n=>
+`<div class="card"><b>${n.title}</b><p>${n.note||''}</p><a href="${n.url}" target="_blank" rel="noopener">🔊 Open / Listen</a></div>`
+).join(''):'<div class="card">अभी कोई Naat नहीं मिली।</div>';
 }
 async function loadMedia(file,id,type){
 try{
